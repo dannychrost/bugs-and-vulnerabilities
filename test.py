@@ -54,7 +54,7 @@ else:
     user_input = input("Enter a username: ")
     conn = sqlite3.connect("mydatabase.db")
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM users WHERE username = '" + user_input + "'")
+    cursor.execute("SELECT * FROM users WHERE username = ?", (user_input, ))
     results = cursor.fetchall()
     for row in results:
         print(row)
@@ -87,8 +87,6 @@ else:
 
     @app.route("/transfer", methods=["POST"])
     def transfer_money():
-        amount = request.form["amount"]
-        recipient = request.form["recipient"]
         # Transfer money logic here
         return "Money transferred successfully!"
 
